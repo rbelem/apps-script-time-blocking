@@ -2,7 +2,7 @@ const HALF_HOUR = 30 * 60 * 1000;
 
 function main() {
   var mainCalendar = CalendarApp.getDefaultCalendar();
-  var timeBlockingCalendar = CalendarApp.getCalendarsByName('Time Blocking')[0];
+  var timeBlockingCalendar = CalendarApp.getCalendarsByName('Slots')[0];
 
   const now = new Date() //.setHours(0, 0, 0, 0);
   const nextWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7)
