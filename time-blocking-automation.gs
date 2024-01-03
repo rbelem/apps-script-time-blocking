@@ -8,14 +8,7 @@ function main() {
   const nextWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7)
 
   mainCalendar.getEvents(now, nextWeek).map((event) => {
-    if (event.getLocation()) {
-      if (commuteExistsForEvent(timeBlockingCalendar, event)) {
-        console.log('Evento já processado');
-        return true;
-      }
-
-      createCommuteEvents(timeBlockingCalendar, event);
-    }
+    createCommuteEvents(timeBlockingCalendar, event);
   })
 }
 
@@ -33,6 +26,15 @@ function commuteExistsForEvent(commuteCalendar, event) {
 }
 
 function createCommuteEvents(commuteCalendar, event) {
+  if (event.getLocation() === null || event.getLocation() === "") {
+    return false;
+  }
+
+  if (commuteExistsForEvent(commuteCalendar, event)) {
+    console.log('Evento já processado');
+    return false;
+  }
+
   // TODO: Check if event is recurrent and create commute events as recurrent as well
   var commuteStartDate = new Date(event.getStartTime().getTime() - HALF_HOUR);
   var commuteEndDate = event.getStartTime();
